@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+    <link rel="stylesheet" href="{% static 'css/products.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        
+      <img src="{% static 'sonnen.png' %}" alt="Logotipo da Empresa" class="logo">
+      <div class="nav-group">
+        
+        <button class="contact-btn">Contato</button>
+        
+        <div class="dropdown">
+            <button class="dropbtn" id="products-btn">Produtos</button>
+            <div class="dropdown-content" id="product-dropdown">
+                <!-- Lista de produtos aqui -->
+                {% for produto in produtos %}
+                    <a href="{% url 'detalhes_produto' produto_id=produto.id %}">{{ produto.nome }}</a>
+                {% empty %}
+                    <p>Nenhum produto cadastrado.</p>
+                {% endfor %}
+            </div>
+          </div>
+
+        <a href="{% url 'logout' %}" class="button-logout">Sair</a>
+      </div>
+
+      
+      
+    </nav>
+
+    
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Entre em Contato</h2>
+            <p>Telefone:+55 (55) 3223-4858</p>
+            <p>Email: contato@sonnen.com.br</p>
+            <p>Endereço: BR-287, 5635 - Camobi</p>
+        </div>
+    </div>
+
+    
+    <section class="product-list">
+        <div class="product-container">
+            {% for produto in produtos %}
+                <div class="product-item">
+                    <img src="{{ produto.imagem }}" alt="{{ produto.nome }}" style="width: 400px;">
+                    <h2>{{ produto.nome }}</h2>
+                    <a href="{% url 'detalhes_produto' produto_id=produto.id %}" class="explore-btn">Explore Now ></a>
+                </div>
+            {% empty %}
+                <p>Você ainda não possui produtos cadastrados.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="{% static 'js/products.js' %}"></script>
+    <script>
+        // Modal de Contato
+        var contactModal = document.getElementById('contact-modal');
+        var contactButton = document.querySelector('.contact-btn');
+        var closeButton = document.querySelector('.close');
+
+        contactButton.onclick = function() {
+            contactModal.style.display = 'block';
+        }
+
+        closeButton.onclick = function() {
+            contactModal.style.display = 'none';
+        }
+
+        // Fechar o modal se clicar fora dele
+        window.onclick = function(event) {
+            if (event.target == contactModal) {
+                contactModal.style.display = 'none';
+            }
+        }
+
+        // Dropdown de Produtos
+        var productDropdown = document.getElementById('product-dropdown');
+        var productsButton = document.getElementById('products-btn');
+
+        productsButton.onclick = function() {
+            productDropdown.style.display = productDropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Fechar o dropdown se clicar fora dele
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropbtn')) {
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.style.display === 'block') {
+                        openDropdown.style.display = 'none';
+                    }
+                }
+            }
+            // Fechar o modal se clicar fora dele
+            if (event.target == contactModal) {
+                contactModal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

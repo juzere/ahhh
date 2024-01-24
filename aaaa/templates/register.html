@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<style>
+    .messages li.error { color: red; }
+    .messages li.success { color: green; }
+</style>
+<html>
+   
+    <title>Registro</title>
+   
+</head>
+<link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+
+<body>
+   {% if messages %}
+    <ul class="messages">
+       {% for message in messages %}
+           <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+       {% endfor %}
+    </ul>
+   {% endif %}
+<head>
+
+    
+    <div class="registration-container">
+        <h2>Criar Conta</h2>
+       
+        <form method="post" class="registration-form">
+            {% csrf_token %}
+            {{ form.username.label_tag }} {{ form.username }}
+            {{ form.name.label_tag }} {{ form.name }}
+            {{ form.lastname.label_tag }} {{ form.lastname }}
+            {{ form.email.label_tag }} {{ form.email }}
+            {{ form.password1.label_tag }} {{ form.password1 }}
+            {{ form.password2.label_tag }} {{ form.password2 }}
+            <button type="submit">Registrar</button>
+        </form>
+    
+    <p class="login-link">Já tem uma conta? <a href="{% url 'login' %}">Faça login</a></p>
+    </div> 
+
+</body>
+</html>

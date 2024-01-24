@@ -1,0 +1,183 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F5F5F5; /* Cor de fundo mais clara para a página */
+}
+
+.navbar {
+    background-color: #efeff3; 
+    color: #fff; 
+    display: flex;
+    justify-content: space-between; 
+   
+    align-items: center;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); 
+}
+
+.logo {
+    height: 50px; 
+    
+}
+
+.nav-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-btn, .dropbtn {
+    background-color: #333; 
+    color: white;
+    padding: 10px 15px; 
+    margin: 0 10px; 
+    font-size: 16px;
+   
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
+}
+
+.contact-btn:hover, .dropbtn:hover {
+    background-color: #555; 
+}
+
+.button-logout {
+    background-color: #FFD700; /* Fundo amarelo para o botão de sair */
+    color: #000; /* Cor do texto preto */
+    padding: 10px 15px; /* Ajustado para corresponder ao tamanho do botão na imagem */
+    border-radius: 5px; /* Bordas levemente arredondadas */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    font-weight: bold; /* Texto em negrito */
+    transition: background-color 0.3s ease; /* Transição suave para o hover */
+    margin: 0 10px; /* Espaçamento entre os botões */
+}
+
+.button-logout:hover {
+    background-color: #FFC107; 
+}
+
+
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9; /* Cor de fundo do menu suspenso */
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 5px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #555; /* Cor de fundo do botão quando suspenso */
+}
+
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.product-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* Permite a quebra de linha para os itens */
+    gap: 20px;
+    margin: 20px;
+}
+
+.product-item {
+    width: 300px; /* Largura fixa para cada cartão de produto */
+    background-color: #000; /* Fundo preto para o cartão */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para o cartão */
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product-item h2 {
+    color: #FFD700; /* Cor do texto em amarelo */
+    margin: 20px 0;
+}
+
+.explore-btn {
+    background-color: #FFD700; /* Fundo amarelo para o botão */
+    color: #000; /* Cor do texto preto */
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.explore-btn:hover {
+    background-color: #FFC107;
+}
+
+.home-btn {
+    background-color: #333; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    padding: 10px 15px; /* Espaçamento interno do botão */
+    margin: 0 10px; /* Margem externa do botão */
+    font-size: 16px; /* Tamanho da fonte */
+    border: none; /* Sem bordas */
+    cursor: pointer; /* Cursor em forma de ponteiro */
+    border-radius: 5px; /* Bordas arredondadas */
+    text-decoration: none; /* Remove o sublinhado do link */
+    transition: background-color 0.3s ease; /* Transição suave de cor de fundo */
+}
+
+.home-btn:hover {
+    background-color: #555; /* Cor de fundo do botão ao passar o mouse */
+}
