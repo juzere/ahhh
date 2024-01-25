@@ -18,7 +18,7 @@
           {% csrf_token %}
           {{ form.username.label_tag }} {{ form.username }}
           {{ form.password.label_tag }} {{ form.password }}
-          <p class="senha-link"><a href="{% url 'password_reset_form' %}">Esqueci minha senha</a></p>
+          <p class="senha-link"><a href="{% url 'password_reset' %}">Esqueci minha senha</a></p>
           <button type="submit" class="submit-button">Entrar</button>
       </form>
       <p class="register-link">Não tem uma conta? <a href="{% url 'register' %}">Crie uma agora</a></p>

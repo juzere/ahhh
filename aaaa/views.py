@@ -21,18 +21,18 @@ def meus_produtos(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)  # Pass request.POST to the form
-        if form.is_valid():  # Check if the form is valid
+        form = LoginForm(request.POST) 
+        if form.is_valid(): 
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            user = authenticate(request, username=username, password=password)  # Authenticate the user
+            user = authenticate(request, username=username, password=password)  
             if user is not None:
-                login(request, user)  # Log the user in
-                return redirect('meus_produtos')  # Redirect to the products page
+                login(request, user)  
+                return redirect('meus_produtos')  
             else:
                 messages.error(request, 'Usuário ou senha inválidos')
     else:
-        form = LoginForm()  # An unbound form
+        form = LoginForm() 
     return render(request, 'login.html', {'form': form})
 
 
@@ -60,6 +60,6 @@ def detalhes_produto(request, produto_id):
 class CustomPasswordResetCompleteView(PasswordResetCompleteView):
     def get(self, request, *args, **kwargs):
         response = super().get(request, *args, **kwargs)
-        # Redireciona após 5 segundos (5000 milissegundos)
         response['Refresh'] = '5;url=' + str(reverse_lazy('login'))
         return response
+    

@@ -45,28 +45,24 @@ body {
 }
 
 .button-logout {
-    background-color: #FFD700; /* Fundo amarelo para o botão de sair */
-    color: #000; /* Cor do texto preto */
-    padding: 10px 15px; /* Ajustado para corresponder ao tamanho do botão na imagem */
-    border-radius: 5px; /* Bordas levemente arredondadas */
-    text-transform: uppercase; /* Texto em maiúsculas */
-    font-weight: bold; /* Texto em negrito */
-    transition: background-color 0.3s ease; /* Transição suave para o hover */
-    margin: 0 10px; /* Espaçamento entre os botões */
+    background-color: #FFD700; 
+    color: #000; 
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    text-transform: uppercase; 
+    font-weight: bold; 
+    transition: background-color 0.3s ease; 
+    margin: 0 10px; 
 }
 
 .button-logout:hover {
     background-color: #FFC107; 
 }
 
-
-
 .dropdown {
     position: relative;
     display: inline-block;
 }
-
-
 
 .dropdown-content {
     display: none;
@@ -101,7 +97,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro semi-transparente */
+    background-color: rgba(0, 0, 0, 0.7); 
 }
 
 .modal-content {
@@ -126,7 +122,7 @@ body {
 .product-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap; /* Permite a quebra de linha para os itens */
+    flex-wrap: wrap; 
     gap: 20px;
     margin: 20px;
 }
@@ -162,22 +158,99 @@ body {
 }
 
 .explore-btn:hover {
-    background-color: #FFC107;
+    background-color: #FFD700;
 }
 
 .home-btn {
-    background-color: #333; /* Cor de fundo do botão */
-    color: white; /* Cor do texto */
-    padding: 10px 15px; /* Espaçamento interno do botão */
-    margin: 0 10px; /* Margem externa do botão */
-    font-size: 16px; /* Tamanho da fonte */
-    border: none; /* Sem bordas */
-    cursor: pointer; /* Cursor em forma de ponteiro */
-    border-radius: 5px; /* Bordas arredondadas */
-    text-decoration: none; /* Remove o sublinhado do link */
-    transition: background-color 0.3s ease; /* Transição suave de cor de fundo */
+    background-color: #333; 
+    color: white; 
+    padding: 10px 15px; 
+    margin: 0 10px; 
+    font-size: 16px; 
+    border: none; 
+    cursor: pointer; 
+    border-radius: 5px;
+    text-decoration: none; 
+    transition: background-color 0.3s ease;
 }
 
 .home-btn:hover {
-    background-color: #555; /* Cor de fundo do botão ao passar o mouse */
+    background-color: #555; 
+}
+
+.registration-container {
+    width: 400px;
+    padding: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-right: 50%; 
+    position: relative; 
+    z-index: 1;
+}
+
+.registration-container h2 {
+    color: #333; 
+    font-size: 28px; 
+    margin-bottom: 30px;
+}
+
+
+
+.registration-container input[type="email"],
+.registration-container input[type="password"] {
+    width: calc(100% - 10px); 
+    margin: 5px;
+    padding: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 25px; 
+}
+
+/* Estilizar o botão de envio */
+.registration-container button {
+    margin-top: 30px; 
+    background-color: #fced20;
+    color: #000000;
+    width: calc(100% - 10px); 
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+
+.registration-container button:hover {
+    background-color: #3f3e3b; 
+}
+
+
+.navbar {
+    margin-bottom: 50px; 
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-image: url('https://scontent.fria2-1.fna.fbcdn.net/v/t39.30808-6/275170470_3876650215893581_2290855121975596795_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=3635dc&_nc_eui2=AeFIBvJv42m5H7-JTMWNZ8ZFdpt6mM3KND92m3qYzco0PxterzUtUnhl9ZyMryzOKegiUHlBP65dzvgRsSC6uHdh&_nc_ohc=UkeudWZVdYMAX-4DXGj&_nc_ht=scontent.fria2-1.fna&oh=00_AfDVN9ByHrVt87-M3aew7B-e_H2kUh-tTteYqYQfikz47Q&oe=65B31198'); /* Add your image path here */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: -1; 
+}
+
+body {
+    padding-right: 5%; 
 }
