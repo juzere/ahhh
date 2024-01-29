@@ -224,33 +224,3 @@ body {
 }
 
 
-.navbar {
-    margin-bottom: 50px; 
-}
-
-body {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    align-items: center;
-    background-image: url('https://scontent.fria2-1.fna.fbcdn.net/v/t39.30808-6/275170470_3876650215893581_2290855121975596795_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=3635dc&_nc_eui2=AeFIBvJv42m5H7-JTMWNZ8ZFdpt6mM3KND92m3qYzco0PxterzUtUnhl9ZyMryzOKegiUHlBP65dzvgRsSC6uHdh&_nc_ohc=UkeudWZVdYMAX-4DXGj&_nc_ht=scontent.fria2-1.fna&oh=00_AfDVN9ByHrVt87-M3aew7B-e_H2kUh-tTteYqYQfikz47Q&oe=65B31198'); /* Add your image path here */
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-}
-body::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: rgba(0, 0, 0, 0.5); 
-    z-index: -1; 
-}
-
-body {
-    padding-right: 5%; 
-}

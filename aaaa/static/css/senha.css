@@ -1,0 +1,72 @@
+.navbar {
+    margin-bottom: 50px; 
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-image: url('https://scontent.fpoa2-1.fna.fbcdn.net/v/t31.18172-8/28698987_2486121568279793_5756825261191799421_o.jpg?_nc_cat=102&ccb=1-7&_nc_sid=7f8c78&_nc_eui2=AeGKP2YFE3jBsqe2dTVPDGQXnLjGCg-q7dScuMYKD6rt1EPY6XXNmJlXEpsAzznODRASIC8Rb-E7f4q9je0QyzKY&_nc_ohc=eOQLKMkJ-ysAX-WAvAN&_nc_ht=scontent.fpoa2-1.fna&oh=00_AfBb1bxcZa1cbx3PBqCoy0-qGAjLCQ5vUtQ0ccDoJGWBWA&oe=65DCDD7E'); /* Add your image path here */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5); 
+    z-index: -1; 
+}
+
+body {
+    padding-right: 5%; 
+}
+
+.registration-container {
+    width: 400px;
+    padding: 60px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-right: 50%; 
+    position: relative; 
+    z-index: 1;
+}
+
+.registration-container h2 {
+    color: #333; 
+    font-size: 28px; 
+    margin-bottom: 30px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+  
+}
+
+.form-group > div {
+    margin-bottom: 10px; 
+    width: calc(100% + 30px); 
+    
+}
+
+.btn-primary {
+    margin-top: 30px; 
+    background-color: #fced20;
+    color: #000000;
+    width: calc(100% - 30px); 
+    padding: 15px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
