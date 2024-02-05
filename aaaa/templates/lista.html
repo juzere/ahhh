@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medições de Velocidade</title>
+</head>
+<body>
+    <h1>Últimas Medições de Velocidade</h1>
+    <table>
+        <tr>
+            <th>Velocidade</th>
+            <th>Data/Hora</th>
+        </tr>
+        {% for medicao in medicoes %}
+        <tr>
+            <td>{{ medicao.velocidade }}</td>
+            <td>{{ medicao.data_hora }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

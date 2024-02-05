@@ -33,14 +33,19 @@
       
       
     </nav>
-
+    
     
     <div id="contact-modal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Entre em Contato</h2>
-            <p>Telefone:+55 (55) 3223-4858</p>
             <p>Email: contato@sonnen.com.br</p>
+            <p></p>
+            <h4>Blumenau, Santa Catarina</h4>
+            <p>Telefone: +55 (47) 3053-1551 </p>
+            <p> </p>
+            <h4>Santa Maria, Rio Grande do Sul</h4>
+            <p>Telefone:+55 (55) 3223-4858</p>
             <p>Endereço: BR-287, 5635 - Camobi</p>
         </div>
     </div>
@@ -52,7 +57,7 @@
                 <div class="product-item">
                     <img src="{{ produto.imagem }}" alt="{{ produto.nome }}" style="width: 400px;">
                     <h2>{{ produto.nome }}</h2>
-                    <a href="{% url 'detalhes_produto' produto_id=produto.id %}" class="explore-btn">Explore Now ></a>
+                    <a href="{% url 'detalhes_produto' produto_id=produto.id %}" class="explore-btn">Detalhes ></a>
                 </div>
             {% empty %}
                 <p>Você ainda não possui produtos cadastrados.</p>
@@ -108,5 +113,27 @@
             }
         }
     </script>
+
+<div class="wind-speed-widget">
+    <div class="wind-icon">
+      
+    </div>
+    <div class="wind-info">
+        <h1>Velocidade do vento</h1>
+        <table>
+            <tr>
+                <th>Velocidade</th>
+                <th>Data/Hora</th>
+            </tr>
+            {% for medicao in medicoes %}
+            <tr>
+                <td>{{ medicao.velocidade }}</td>
+                <td>{{ medicao.data_hora }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+       
+    </div>
+</div>
 </body>
 </html>

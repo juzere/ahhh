@@ -6,6 +6,9 @@ from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, LoginForm
 from django.contrib import messages
 from .models import Produto
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import MedicaoVelocidade
 from django.contrib.auth.decorators import login_required
 
 
@@ -17,7 +20,9 @@ def logout_view(request):
 @login_required
 def meus_produtos(request):
     produtos = Produto.objects.filter(usuario=request.user)
-    return render(request, 'meus_produtos.html', {'produtos': produtos})
+    medicoes = MedicaoVelocidade.objects.all().order_by('-data_hora')[:3]  
+    return render(request, 'meus_produtos.html', {'produtos': produtos, 'medicoes': medicoes})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -63,3 +68,18 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
         response['Refresh'] = '5;url=' + str(reverse_lazy('login'))
         return response
     
+@api_view(['POST'])
+def receber_medicao(request):
+    velocidade = request.data.get('velocidade')
+    if velocidade is not None:
+        medicao = MedicaoVelocidade(velocidade=velocidade)
+        medicao.save()
+        return Response({"status": "sucesso", "velocidade": velocidade})
+    else:
+        return Response({"status": "erro", "mensagem": "Velocidade não fornecida."})
+
+from django.shortcuts import render
+from .models import MedicaoVelocidade
+
+
+

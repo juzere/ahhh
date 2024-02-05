@@ -1,9 +1,11 @@
 from django.urls import path
+from .views import receber_medicao
 from .views import login_view, register, meus_produtos, detalhes_produto, logout_view, CustomPasswordResetCompleteView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', login_view, name='login'),
+    path('api/receber/', receber_medicao, name='receber_medicao'),
     path('register/', register, name='register'),
     path('meus_produtos/', meus_produtos, name='meus_produtos'),
     path('produtos/<int:produto_id>/', detalhes_produto, name='detalhes_produto'),
