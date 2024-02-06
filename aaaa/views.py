@@ -10,6 +10,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import MedicaoVelocidade
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 @login_required
@@ -20,7 +21,7 @@ def logout_view(request):
 @login_required
 def meus_produtos(request):
     produtos = Produto.objects.filter(usuario=request.user)
-    medicoes = MedicaoVelocidade.objects.all().order_by('-data_hora')[:3]  
+    medicoes = MedicaoVelocidade.objects.filter(usuario=request.user).order_by('-data_hora')[:3]  
     return render(request, 'meus_produtos.html', {'produtos': produtos, 'medicoes': medicoes})
 
 
@@ -71,15 +72,16 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
 @api_view(['POST'])
 def receber_medicao(request):
     velocidade = request.data.get('velocidade')
-    if velocidade is not None:
-        medicao = MedicaoVelocidade(velocidade=velocidade)
-        medicao.save()
-        return Response({"status": "sucesso", "velocidade": velocidade})
+    usuario_id = request.data.get('usuario_id')  # Ou outro identificador ou método de autenticação
+    if velocidade is not None and usuario_id is not None:
+        try:
+            usuario = User.objects.get(id=usuario_id)
+            medicao = MedicaoVelocidade(velocidade=velocidade, usuario=usuario)
+            medicao.save()
+            return Response({"status": "sucesso", "velocidade": velocidade})
+        except User.DoesNotExist:
+            return Response({"status": "erro", "mensagem": "Usuário não encontrado."})
     else:
-        return Response({"status": "erro", "mensagem": "Velocidade não fornecida."})
-
-from django.shortcuts import render
-from .models import MedicaoVelocidade
-
+        return Response({"status": "erro", "mensagem": "Velocidade ou usuário não fornecido."})
 
 

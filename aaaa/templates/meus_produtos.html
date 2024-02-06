@@ -18,8 +18,7 @@
         <div class="dropdown">
             <button class="dropbtn" id="products-btn">Produtos</button>
             <div class="dropdown-content" id="product-dropdown">
-                <!-- Lista de produtos aqui -->
-                {% for produto in produtos %}
+                 {% for produto in produtos %}
                     <a href="{% url 'detalhes_produto' produto_id=produto.id %}">{{ produto.nome }}</a>
                 {% empty %}
                     <p>Nenhum produto cadastrado.</p>

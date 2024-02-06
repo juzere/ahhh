@@ -16,6 +16,7 @@ class Produto(models.Model):
 
 
 class MedicaoVelocidade(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     data_hora = models.DateTimeField(auto_now_add=True)
     velocidade = models.FloatField()
 
