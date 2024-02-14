@@ -1,3 +1,4 @@
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.views import PasswordResetCompleteView
@@ -18,11 +19,23 @@ def logout_view(request):
     logout(request)
     return redirect('login') 
 
+import json
+from django.shortcuts import render
+
 @login_required
 def meus_produtos(request):
     produtos = Produto.objects.filter(usuario=request.user)
-    medicoes = MedicaoVelocidade.objects.filter(usuario=request.user).order_by('-data_hora')[:3]  
-    return render(request, 'meus_produtos.html', {'produtos': produtos, 'medicoes': medicoes})
+    medicoes = MedicaoVelocidade.objects.filter(usuario=request.user).order_by('-data_hora')[:5]
+
+    # Serializar os dados para JSON
+    datas_json = json.dumps([medicao.data_hora.strftime('%Y-%m-%d %H:%M') for medicao in medicoes])
+    velocidades_json = json.dumps([medicao.velocidade for medicao in medicoes])
+
+    return render(request, 'meus_produtos.html', {
+        'produtos': produtos, 
+        'datas_json': datas_json,
+        'velocidades_json': velocidades_json
+    })
 
 
 def login_view(request):
@@ -83,5 +96,7 @@ def receber_medicao(request):
             return Response({"status": "erro", "mensagem": "Usuário não encontrado."})
     else:
         return Response({"status": "erro", "mensagem": "Velocidade ou usuário não fornecido."})
+
+
 
 

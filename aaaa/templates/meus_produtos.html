@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Produtos</title>
     <link rel="stylesheet" href="{% static 'css/products.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script> 
 </head>
 <body>
     <nav class="navbar">
@@ -64,11 +66,15 @@
         </div>
     </section>
 
+    <div style="width: 600px; height: 400px;">
+        <canvas id="windSpeedChart"></canvas>
+    </div>
+
     <!-- Scripts -->
     <script src="{% static 'js/products.js' %}"></script>
     <script>
-        // Modal de Contato
-        var contactModal = document.getElementById('contact-modal');
+         // Modal de Contato
+         var contactModal = document.getElementById('contact-modal');
         var contactButton = document.querySelector('.contact-btn');
         var closeButton = document.querySelector('.close');
 
@@ -111,28 +117,64 @@
                 contactModal.style.display = 'none';
             }
         }
-    </script>
 
-<div class="wind-speed-widget">
-    <div class="wind-icon">
-      
-    </div>
-    <div class="wind-info">
-        <h1>Velocidade do vento</h1>
-        <table>
-            <tr>
-                <th>Velocidade</th>
-                <th>Data/Hora</th>
-            </tr>
-            {% for medicao in medicoes %}
-            <tr>
-                <td>{{ medicao.velocidade }} m/s  </td> 
-                <td>{{ medicao.data_hora }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-       
-    </div>
-</div>
+        document.addEventListener('DOMContentLoaded', function () {
+    var datas = JSON.parse('{{ datas_json|safe }}');
+    var velocidades = JSON.parse('{{ velocidades_json|safe }}');
+   
+
+    var ctx = document.getElementById('windSpeedChart').getContext('2d');
+    var windSpeedChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: datas,
+            datasets: [{
+                label: 'Velocidade do Vento (m/s)',
+                data: velocidades,
+                backgroundColor: 'rgba(255, 255, 0, 1)',
+                borderColor: 'rgba(0, 0, 0, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                x: {
+                    ticks: {
+                        maxRotation: 90, 
+                        minRotation: 45, 
+                        autoSkip: true, 
+                        maxTicksLimit: 15, 
+                        fontSize: 10 
+                    }
+                },
+                y: {
+                    
+                    beginAtZero: true,
+                    ticks: {
+                        fontSize: 12 // Tamanho da fonte dos rótulos
+                    }
+                }
+            },
+            responsive: true, 
+            maintainAspectRatio: false, 
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].label || '';
+                        if (label) {
+                            label += ': ';
+                        }
+                        label += Math.round(tooltipItem.yLabel * 100) / 100;
+                        return label;
+                    }
+                }
+            }
+        }
+    });
+});
+
+    </script>
 </body>
 </html>
