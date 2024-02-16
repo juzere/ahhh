@@ -82,10 +82,10 @@ WSGI_APPLICATION = 'ahhh.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'database-1',
-        'USER': 'admin',
+        'NAME': 'teste1',
+        'USER': '',
         'PASSWORD': 'rebelde13',
-        'HOST': 'database-1.cdakammucag6.us-east-1.rds.amazonaws.com',
+        'HOST': 'teste1.cdakammucag6.us-east-1.rds.amazonaws.com',
         'PORT': '3306', 
     }
 }
