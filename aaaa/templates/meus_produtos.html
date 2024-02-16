@@ -73,7 +73,7 @@
     <!-- Scripts -->
     <script src="{% static 'js/products.js' %}"></script>
     <script>
-         // Modal de Contato
+        
          var contactModal = document.getElementById('contact-modal');
         var contactButton = document.querySelector('.contact-btn');
         var closeButton = document.querySelector('.close');
@@ -93,7 +93,7 @@
             }
         }
 
-        // Dropdown de Produtos
+       
         var productDropdown = document.getElementById('product-dropdown');
         var productsButton = document.getElementById('products-btn');
 
@@ -112,7 +112,6 @@
                     }
                 }
             }
-            // Fechar o modal se clicar fora dele
             if (event.target == contactModal) {
                 contactModal.style.display = 'none';
             }
@@ -151,7 +150,7 @@
                     
                     beginAtZero: true,
                     ticks: {
-                        fontSize: 12 // Tamanho da fonte dos rótulos
+                        fontSize: 12 
                     }
                 }
             },

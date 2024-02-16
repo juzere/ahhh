@@ -27,7 +27,6 @@ def meus_produtos(request):
     produtos = Produto.objects.filter(usuario=request.user)
     medicoes = MedicaoVelocidade.objects.filter(usuario=request.user).order_by('-data_hora')[:5]
 
-    # Serializar os dados para JSON
     datas_json = json.dumps([medicao.data_hora.strftime('%Y-%m-%d %H:%M') for medicao in medicoes])
     velocidades_json = json.dumps([medicao.velocidade for medicao in medicoes])
 
@@ -85,7 +84,7 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
 @api_view(['POST'])
 def receber_medicao(request):
     velocidade = request.data.get('velocidade')
-    usuario_id = request.data.get('usuario_id')  # Ou outro identificador ou método de autenticação
+    usuario_id = request.data.get('usuario_id')  
     if velocidade is not None and usuario_id is not None:
         try:
             usuario = User.objects.get(id=usuario_id)
