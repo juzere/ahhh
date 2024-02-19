@@ -8,7 +8,7 @@ usuario_id = 5
 
 # Dados a serem enviados para a API
 dados = {
-    "velocidade": 45.2,
+    "velocidade": 60.2,
     "usuario_id": usuario_id
 }
 
