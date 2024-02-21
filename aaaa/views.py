@@ -8,6 +8,7 @@ from .forms import CustomUserCreationForm, LoginForm
 from django.contrib import messages
 from .models import Produto
 from rest_framework.decorators import api_view
+from django.utils.dateparse import parse_date
 from rest_framework.response import Response
 from .models import MedicaoVelocidade
 from django.contrib.auth.decorators import login_required
@@ -25,17 +26,32 @@ from django.shortcuts import render
 @login_required
 def meus_produtos(request):
     produtos = Produto.objects.filter(usuario=request.user)
-    medicoes = MedicaoVelocidade.objects.filter(usuario=request.user).order_by('-data_hora')[:5]
+    
+    # Obtém as datas do formulário
+    data_inicio = request.GET.get('data_inicio')
+    data_fim = request.GET.get('data_fim')
 
+    # Converte as strings de data para objetos datetime
+    if data_inicio:
+        data_inicio = parse_date(data_inicio)
+    if data_fim:
+        data_fim = parse_date(data_fim)
+
+    # Filtra as medições com base nas datas, se fornecidas
+    if data_inicio and data_fim:
+        medicoes = MedicaoVelocidade.objects.filter(usuario=request.user, data_hora__range=[data_inicio, data_fim])
+    else:
+        medicoes = MedicaoVelocidade.objects.filter(usuario=request.user)
+
+    # Prepara os dados para o gráfico
     datas_json = json.dumps([medicao.data_hora.strftime('%Y-%m-%d %H:%M') for medicao in medicoes])
     velocidades_json = json.dumps([medicao.velocidade for medicao in medicoes])
 
     return render(request, 'meus_produtos.html', {
-        'produtos': produtos, 
+        'produtos': produtos,
         'datas_json': datas_json,
         'velocidades_json': velocidades_json
     })
-
 
 def login_view(request):
     if request.method == 'POST':
@@ -52,7 +68,6 @@ def login_view(request):
     else:
         form = LoginForm() 
     return render(request, 'login.html', {'form': form})
-
 
 def register(request):
     if request.method =='POST':
