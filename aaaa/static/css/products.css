@@ -126,8 +126,6 @@ body {
     display: block;
 }
 
-
-
 .modal {
     display: none; 
     position: fixed;
@@ -197,11 +195,6 @@ body {
     background-color: #FFD700;
 }
 
-
-
-
-
-
 .home-btn {
     background-color: #333; 
     color: white; 
@@ -236,8 +229,6 @@ body {
     margin-bottom: 30px;
 }
 
-
-
 .registration-container input[type="email"],
 .registration-container input[type="password"] {
     width: calc(100% - 10px); 
@@ -263,7 +254,3 @@ body {
 .registration-container button:hover {
     background-color: #3f3e3b; 
 }
-
-
-
-
