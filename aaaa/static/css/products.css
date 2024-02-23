@@ -140,6 +140,10 @@ body {
 .selector{
     justify-content: space-between; 
     margin-left: 15px;
+    display: flex;
+    align-items: center;
+  
+
 
 }
 
