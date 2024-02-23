@@ -51,7 +51,14 @@
             <p>Endereço: BR-287, 5635 - Camobi</p>
         </div>
     </div>
-
+ <div class="selector"><h3>Velocidade do Vento</h3>
+        <select name="dispositivo_id" onchange="location = this.value;">
+           {% for dispositivo in dispositivos %}
+           <option value="?dispositivo_id={{ dispositivo }}">{{ dispositivo }}</option>
+           {% endfor %}
+       </select>
+       
+       </div>
  <div class="main-content"> 
 
     <div id="chart" style="width: 600px; height: 400px;"></div>
@@ -73,9 +80,16 @@
 
  </div>
 
-    
-    
-  
+
+<h3>Personalização</h3>
+<label for="lineColor">Cor da Linha:</label>
+<input type="color" id="lineColor" name="lineColor" value="#0000ff">
+
+
+<label for="fillColor">Cor de Fundo:</label>
+<input type="color" id="fillColor" name="fillColor" value="#00ff00">
+
+<button onclick="updateChartColors()">Atualizar Cores</button>
 
     <!-- Scripts -->
     <script src="{% static 'js/products.js' %}"></script>
@@ -124,79 +138,98 @@
             }
         }
 
+
+        var myChart;
+
         document.addEventListener('DOMContentLoaded', function () {
-    var datas = JSON.parse('{{ datas_json|safe }}');
-    var velocidades = JSON.parse('{{ velocidades_json|safe }}');
+            var datas = JSON.parse('{{ datas_json|safe }}');
+            var velocidades = JSON.parse('{{ velocidades_json|safe }}');
 
-    var myChart = echarts.init(document.getElementById('chart'));
+            myChart = echarts.init(document.getElementById('chart'));
 
-    var option = {
-        tooltip: {
-            trigger: 'axis',
-            axisPointer: {
-                type: 'shadow'
-            }
-        },
-        xAxis: {
-            type: 'category',
-            data: datas
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: velocidades,
-            type: 'line',
-            symbol: 'none', 
-            smooth: false,
-            itemStyle: {
-            color: 'black'
-            },
-            areaStyle: {
-            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-            {
-            offset: 1,
-            color: '#FFD700'
-             },
-            {
-            offset: 0,
-            color: '#daa520'
-             }
-        ])
-      },
-      
-    
-        }],
-        dataZoom: [
-            {
-                type: 'inside',
-                start: 0,
-                end: 100
-            },
-            {
-                start: 0,
-                end: 100,
-                handleSize: '100%',
-                handleStyle: {
-                    color: 'black',
-                    shadowBlur: 3,
-                    shadowColor: 'rgba(0, 0, 0, 0.2)',
-                    shadowOffsetX: 2,
-                    shadowOffsetY: 2
+            var option = {
+                tooltip: {
+                    trigger: 'axis',
+                    axisPointer: {
+                        type: 'shadow'
+                    }
                 },
-                bottom: 0
+                xAxis: {
+                    type: 'category',
+                    data: datas
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: velocidades,
+                    type: 'line',
+                    symbol: 'none', 
+                    smooth: false,
+                    itemStyle: {
+                        color: 'black'
+                    },
+                    areaStyle: {
+                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                            {
+                                offset: 1,
+                                color: '#FFD700'
+                            },
+                            {
+                                offset: 0,
+                                color: '#daa520'
+                            }
+                        ])
+                    }
+                }],
+                dataZoom: [
+                    {
+                        type: 'inside',
+                        start: 0,
+                        end: 100
+                    },
+                    {
+                        start: 0,
+                        end: 100,
+                        handleSize: '100%',
+                        handleStyle: {
+                            color: 'black',
+                            shadowBlur: 3,
+                            shadowColor: 'rgba(0, 0, 0, 0.2)',
+                            shadowOffsetX: 2,
+                            shadowOffsetY: 2
+                        },
+                        bottom: 0
+                    }
+                ]
+            };
+
+            myChart.setOption(option);
+        });
+
+        function updateChartColors() {
+            var lineColor = document.getElementById('lineColor').value;
+            var fillColor = document.getElementById('fillColor').value;
+
+           
+            if(myChart) {
+                myChart.setOption({
+                    series: [{
+                        itemStyle: {
+                            color: lineColor
+                        },
+                        areaStyle: {
+                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                                {offset: 0, color: fillColor},
+                                {offset: 1, color: 'transparent'}
+                            ])
+                        }
+                    }]
+                });
+            } else {
+                console.error('Gráfico não inicializado.');
             }
-        ],
-    };
-
-    myChart.setOption(option);
-
-    myChart.on('datazoom', function (params) {
-        console.log(params);
-    });
-});
-
-
+        }
     </script>
 </body>
 </html>

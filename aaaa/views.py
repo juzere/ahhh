@@ -26,29 +26,21 @@ from django.shortcuts import render
 @login_required
 def meus_produtos(request):
     produtos = Produto.objects.filter(usuario=request.user)
-    
-    # Obtém as datas do formulário
-    data_inicio = request.GET.get('data_inicio')
-    data_fim = request.GET.get('data_fim')
+    dispositivos = MedicaoVelocidade.objects.filter(usuario=request.user).values_list('dispositivo_id', flat=True).distinct()
+    dispositivo_selecionado = request.GET.get('dispositivo_id')
 
-    # Converte as strings de data para objetos datetime
-    if data_inicio:
-        data_inicio = parse_date(data_inicio)
-    if data_fim:
-        data_fim = parse_date(data_fim)
-
-    # Filtra as medições com base nas datas, se fornecidas
-    if data_inicio and data_fim:
-        medicoes = MedicaoVelocidade.objects.filter(usuario=request.user, data_hora__range=[data_inicio, data_fim])
+    # Filtra as medições com base no dispositivo selecionado, além das datas
+    if dispositivo_selecionado:
+        medicoes = MedicaoVelocidade.objects.filter(usuario=request.user, dispositivo_id=dispositivo_selecionado)
     else:
-        medicoes = MedicaoVelocidade.objects.filter(usuario=request.user)
+        medicoes = MedicaoVelocidade.objects.none()  # Ou sua lógica preferida aqui
 
-    # Prepara os dados para o gráfico
     datas_json = json.dumps([medicao.data_hora.strftime('%Y-%m-%d %H:%M') for medicao in medicoes])
     velocidades_json = json.dumps([medicao.velocidade for medicao in medicoes])
 
     return render(request, 'meus_produtos.html', {
         'produtos': produtos,
+        'dispositivos': dispositivos,
         'datas_json': datas_json,
         'velocidades_json': velocidades_json
     })
@@ -99,17 +91,19 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
 @api_view(['POST'])
 def receber_medicao(request):
     velocidade = request.data.get('velocidade')
-    usuario_id = request.data.get('usuario_id')  
-    if velocidade is not None and usuario_id is not None:
+    usuario_id = request.data.get('usuario_id')
+    dispositivo_id = request.data.get('dispositivo_id')  # Adicionado
+
+    if velocidade is not None and usuario_id is not None and dispositivo_id is not None:
         try:
             usuario = User.objects.get(id=usuario_id)
-            medicao = MedicaoVelocidade(velocidade=velocidade, usuario=usuario)
+            medicao = MedicaoVelocidade(velocidade=velocidade, usuario=usuario, dispositivo_id=dispositivo_id)
             medicao.save()
             return Response({"status": "sucesso", "velocidade": velocidade})
         except User.DoesNotExist:
             return Response({"status": "erro", "mensagem": "Usuário não encontrado."})
     else:
-        return Response({"status": "erro", "mensagem": "Velocidade ou usuário não fornecido."})
+        return Response({"status": "erro", "mensagem": "Dados incompletos."})
 
 
 

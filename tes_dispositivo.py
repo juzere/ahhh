@@ -4,13 +4,15 @@ import random
 url = "http://127.0.0.1:8000//api/receber/"
 
 usuario_id = 5
+dispositivo_id = "casa_baixo"
 
 # Gerar um número aleatório entre 0 e 100
 velocidade = round(random.uniform(0, 100), 1)
 
 dados = {
     "velocidade": velocidade,
-    "usuario_id": usuario_id
+    "usuario_id": usuario_id,
+    "dispositivo_id": dispositivo_id
 }
 
 response = requests.post(url, json=dados)

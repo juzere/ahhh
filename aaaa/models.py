@@ -16,8 +16,9 @@ class Produto(models.Model):
 
 class MedicaoVelocidade(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    data_hora = models.DateTimeField(auto_now_add=True)
+    dispositivo_id = models.CharField(max_length=100)  # Adicionado para identificar o dispositivo
     velocidade = models.FloatField()
+    data_hora = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.velocidade} - {self.data_hora.strftime('%Y-%m-%d %H:%M:%S')}"
+        return f"{self.dispositivo_id} - {self.velocidade} - {self.data_hora.strftime('%Y-%m-%d %H:%M:%S')}"
