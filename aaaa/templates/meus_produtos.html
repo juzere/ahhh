@@ -51,7 +51,11 @@
             <p>Endereço: BR-287, 5635 - Camobi</p>
         </div>
     </div>
- <div class="selector"><h3>Velocidade do Vento</h3>
+ 
+ <div class="main-content"> 
+
+    <div id="chart" style="width: 600px; height: 400px;"></divid>
+    <div class="selector"><h3>Velocidade do Vento</h3>
         <select name="dispositivo_id" onchange="location = this.value;">
            {% for dispositivo in dispositivos %}
            <option value="?dispositivo_id={{ dispositivo }}">{{ dispositivo }}</option>
@@ -59,10 +63,9 @@
        </select>
        
        </div>
- <div class="main-content"> 
-
-    <div id="chart" style="width: 600px; height: 400px;"></div>
-
+     
+    </div>
+  
 
     <section class="product-list">
         <div class="product-container">
