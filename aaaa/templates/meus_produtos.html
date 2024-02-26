@@ -51,22 +51,38 @@
             <p>Endereço: BR-287, 5635 - Camobi</p>
         </div>
     </div>
- 
- <div class="main-content"> 
 
-    <div id="chart" style="width: 600px; height: 400px;"></divid>
     <div class="selector"><h3>Velocidade do Vento</h3>
-        <select name="dispositivo_id" onchange="location = this.value;">
-           {% for dispositivo in dispositivos %}
-           <option value="?dispositivo_id={{ dispositivo }}">{{ dispositivo }}</option>
-           {% endfor %}
-       </select>
-       
-       </div>
-     
+        
+        <section class="perso">
+            <button id="togglePersonalization">↓</button>
+            <div id="personalizationSection" style="display: none;">
+                <div class="persona-display">
+                    <label for="lineColor">Cor da Linha:</label>
+                    <input type="color" id="lineColor" name="lineColor" value="#0000ff">
+        
+                    <label for="fillColor">Cor de Fundo:</label>
+                    <input type="color" id="fillColor" name="fillColor" value="#00ff00">
+        
+                    <button onclick="updateChartColors()">Atualizar Cores</button>
+                </div>
+            </div>
+        </section>
     </div>
-  
 
+    <div class="dispositivo">
+        <p>Dispositivos:</p>
+        <select name="dispositivo_id" onchange="location = this.value;">
+            {% for dispositivo in dispositivos %}
+            <option value="?dispositivo_id={{ dispositivo }}">{{ dispositivo }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+ <div class="main-content"> 
+    
+    <div id="chart" style="width: 650px; height: 450px;"></divid>
+       </div>
     <section class="product-list">
         <div class="product-container">
             {% for produto in produtos %}
@@ -80,19 +96,10 @@
             {% endfor %}
         </div>
     </section>
-
+ 
  </div>
 
-
-<h3>Personalização</h3>
-<label for="lineColor">Cor da Linha:</label>
-<input type="color" id="lineColor" name="lineColor" value="#0000ff">
-
-
-<label for="fillColor">Cor de Fundo:</label>
-<input type="color" id="fillColor" name="fillColor" value="#00ff00">
-
-<button onclick="updateChartColors()">Atualizar Cores</button>
+</section>
 
     <!-- Scripts -->
     <script src="{% static 'js/products.js' %}"></script>
@@ -164,6 +171,13 @@
                 yAxis: {
                     type: 'value'
                 },
+                grid: {
+                    top: '8', 
+                    right: '10%',
+                    bottom: '10%',
+                    left: '10%',
+                    containLabel: true 
+                    },
                 series: [{
                     data: velocidades,
                     type: 'line',
@@ -202,7 +216,7 @@
                             shadowOffsetX: 2,
                             shadowOffsetY: 2
                         },
-                        bottom: 0
+                        bottom: 4
                     }
                 ]
             };
@@ -233,6 +247,18 @@
                 console.error('Gráfico não inicializado.');
             }
         }
+
+
+        document.getElementById('togglePersonalization').addEventListener('click', function() {
+    var personalizationSection = document.getElementById('personalizationSection');
+    if (personalizationSection.style.display === 'none') {
+        personalizationSection.style.display = 'block';
+        this.innerHTML = '↑ '; 
+    } else {
+        personalizationSection.style.display = 'none';
+        this.innerHTML = '↓ '; 
+    }
+});
     </script>
 </body>
 </html>

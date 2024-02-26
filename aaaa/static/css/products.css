@@ -44,25 +44,12 @@ body {
     padding-left: 20px;
 }
 
-.chart-container {
-    width: 600px; 
+.chart {
+    display: flex;
+    width: 300px; 
     height: 400px;
     padding-right: 20px;
-}
-
-.wind-speed-widget {
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: center;
-    margin: 5px; 
-    margin-right: 10px;
-}
-
-.wind-info{
- align-items: baseline;
+    margin-top: 0px;
 }
 
 .contact-btn, .dropbtn {
@@ -81,6 +68,15 @@ body {
 
 .contact-btn:hover, .dropbtn:hover {
     background-color: #FFD700; 
+}
+
+#togglePersonalization {
+    background: none;
+    border: none;
+    color: black; 
+    cursor: pointer;
+    padding: 5px;
+    font-size: 16px;
 }
 
 .button-logout {
@@ -138,13 +134,32 @@ body {
 }
 
 .selector{
-    justify-content: space-between; 
-    margin-left: 15px;
     display: flex;
-    align-items: center;
-  
+    justify-content: space-between;
+    margin-bottom: 0px;
+}
+
+.perso {
+    display: flex;
+    justify-content: flex-start; 
+    align-items: center; 
+    margin-right: auto; 
+}
+
+#personalizationSection {
+    display: none;
+    text-align: right; 
+    width: 100%;
+}
 
 
+#togglePersonalization {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-size: 24px; 
+    padding: 0;
+    margin: 0 10px 0 0; 
 }
 
 
@@ -218,6 +233,34 @@ body {
     border-radius: 5px;
     text-decoration: none; 
     transition: background-color 0.3s ease;
+}
+
+.dispositivo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 0px;
+    border-radius: 5px;
+}
+
+.dispositivo p {
+    margin-right: 20px;
+    color: #000;
+    font-weight: bold;
+}
+
+.dispositivo select {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+}
+
+
+.dispositivo select:focus {
+    outline: none;
+    border-color: #FFD700;
 }
 
 .home-btn:hover {
