@@ -71,7 +71,7 @@
     </div>
 
     <div class="dispositivo">
-        <p>Dispositivos:</p>
+        <p>Dispositivo:</p>
         <select name="dispositivo_id" onchange="location = this.value;">
             {% for dispositivo in dispositivos %}
             <option value="?dispositivo_id={{ dispositivo }}">{{ dispositivo }}</option>
@@ -99,7 +99,6 @@
  
  </div>
 
-</section>
 
     <!-- Scripts -->
     <script src="{% static 'js/products.js' %}"></script>
@@ -175,7 +174,7 @@
                     top: '8', 
                     right: '10%',
                     bottom: '10%',
-                    left: '10%',
+                    left: '3',
                     containLabel: true 
                     },
                 series: [{
@@ -222,43 +221,60 @@
             };
 
             myChart.setOption(option);
+            loadSavedColors();
         });
 
         function updateChartColors() {
-            var lineColor = document.getElementById('lineColor').value;
-            var fillColor = document.getElementById('fillColor').value;
+    var lineColor = document.getElementById('lineColor').value;
+    var fillColor = document.getElementById('fillColor').value;
 
-           
-            if(myChart) {
-                myChart.setOption({
-                    series: [{
-                        itemStyle: {
-                            color: lineColor
-                        },
-                        areaStyle: {
-                            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                                {offset: 0, color: fillColor},
-                                {offset: 1, color: 'transparent'}
-                            ])
-                        }
-                    }]
-                });
-            } else {
-                console.error('Gráfico não inicializado.');
-            }
-        }
+    if(myChart) {
+        myChart.setOption({
+            series: [{
+                itemStyle: {
+                    color: lineColor
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+                        {offset: 0, color: fillColor},
+                        {offset: 1, color: 'transparent'}
+                    ])
+                }
+            }]
+        });
+    } else {
+        console.error('Gráfico não inicializado.');
+    }
 
+    // Salvar as cores escolhidas no localStorage
+    localStorage.setItem('lineColor', lineColor);
+    localStorage.setItem('fillColor', fillColor);
+}
 
-        document.getElementById('togglePersonalization').addEventListener('click', function() {
+function loadSavedColors() {
+    var savedLineColor = localStorage.getItem('lineColor');
+    var savedFillColor = localStorage.getItem('fillColor');
+
+    if(savedLineColor && savedFillColor) {
+        document.getElementById('lineColor').value = savedLineColor;
+        document.getElementById('fillColor').value = savedFillColor;
+
+        // Atualizar as cores do gráfico com as cores salvas
+        updateChartColors();
+    }
+}
+
+document.getElementById('togglePersonalization').addEventListener('click', function() {
     var personalizationSection = document.getElementById('personalizationSection');
     if (personalizationSection.style.display === 'none') {
         personalizationSection.style.display = 'block';
-        this.innerHTML = '↑ '; 
+        this.innerHTML = '↑';
     } else {
         personalizationSection.style.display = 'none';
-        this.innerHTML = '↓ '; 
+        this.innerHTML = '↓';
     }
 });
+
     </script>
 </body>
 </html>

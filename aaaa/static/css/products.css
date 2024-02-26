@@ -152,7 +152,6 @@ body {
     width: 100%;
 }
 
-
 #togglePersonalization {
     cursor: pointer;
     background: transparent;
@@ -161,7 +160,6 @@ body {
     padding: 0;
     margin: 0 10px 0 0; 
 }
-
 
 .modal-content {
     background-color: #fff;
@@ -257,7 +255,6 @@ body {
     cursor: pointer;
 }
 
-
 .dispositivo select:focus {
     outline: none;
     border-color: #FFD700;
@@ -293,7 +290,6 @@ body {
     border-radius: 25px; 
 }
 
-
 .registration-container button {
     margin-top: 30px; 
     background-color: #fced20;
@@ -304,7 +300,6 @@ body {
     border-radius: 25px;
     cursor: pointer;
 }
-
 
 .registration-container button:hover {
     background-color: #3f3e3b; 

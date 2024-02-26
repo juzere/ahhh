@@ -10,6 +10,7 @@ body {
     background-position: center; 
     background-repeat: no-repeat; 
 }
+
 body::before {
     content: "";
     position: absolute;
@@ -41,8 +42,6 @@ body {
     font-size: 28px; 
     margin-bottom: 30px;
 }
-
-
 
 .login-form {
     display: flex;
@@ -114,6 +113,7 @@ body {
     display: block;
     margin-top: 5px; 
 }
+
 .registration-form {
     display: flex;
     flex-direction: column;
