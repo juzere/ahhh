@@ -246,7 +246,7 @@
         console.error('Gráfico não inicializado.');
     }
 
-    // Salvar as cores escolhidas no localStorage
+    
     localStorage.setItem('lineColor', lineColor);
     localStorage.setItem('fillColor', fillColor);
 }
@@ -259,7 +259,7 @@ function loadSavedColors() {
         document.getElementById('lineColor').value = savedLineColor;
         document.getElementById('fillColor').value = savedFillColor;
 
-        // Atualizar as cores do gráfico com as cores salvas
+        
         updateChartColors();
     }
 }
