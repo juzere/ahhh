@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 class Produto(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
     nome = models.CharField(max_length=100)
@@ -12,11 +13,9 @@ class Produto(models.Model):
     def __str__(self):
         return self.nome
 
-
-
 class MedicaoVelocidade(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
-    dispositivo_id = models.CharField(max_length=100)  # Adicionado para identificar o dispositivo
+    dispositivo_id = models.CharField(max_length=100)  
     velocidade = models.FloatField()
     data_hora = models.DateTimeField(auto_now_add=True)
 
