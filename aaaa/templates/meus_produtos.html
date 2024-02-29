@@ -65,14 +65,19 @@
                     <input type="color" id="fillColor" name="fillColor" value="#00ff00">
         
                     <button onclick="updateChartColors()">Atualizar Cores</button>
+                    <button onclick="resetChartColors()">Redefinir Cores Originais</button>
+
                 </div>
             </div>
         </section>
     </div>
+   
+    
 
     <div class="dispositivo">
         <p>Dispositivo:</p>
         <select name="dispositivo_id" onchange="location = this.value;">
+            <option value="">Selecione</option>
             {% for dispositivo in dispositivos %}
             <option value="?dispositivo_id={{ dispositivo }}">{{ dispositivo }}</option>
             {% endfor %}
@@ -185,18 +190,7 @@
                     itemStyle: {
                         color: 'black'
                     },
-                    areaStyle: {
-                        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                            {
-                                offset: 1,
-                                color: '#FFD700'
-                            },
-                            {
-                                offset: 0,
-                                color: '#daa520'
-                            }
-                        ])
-                    }
+                    
                 }],
                 dataZoom: [
                     {
@@ -273,7 +267,38 @@ document.getElementById('togglePersonalization').addEventListener('click', funct
         personalizationSection.style.display = 'none';
         this.innerHTML = '↓';
     }
+    
 });
+const originalLineColor = '#000000'; 
+const originalFillColorStart = '#FFD700'; 
+const originalFillColorEnd = '#daa520'; 
+
+function resetChartColors() {
+    if (myChart) {
+        myChart.setOption({
+            series: [{
+                itemStyle: {
+                    color: originalLineColor
+                },
+                areaStyle: {
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                        offset: 0, color: originalFillColorStart
+                    }, {
+                        offset: 1, color: originalFillColorEnd
+                    }])
+                }
+            }]
+        });
+    }
+
+    document.getElementById('lineColor').value = originalLineColor;
+    document.getElementById('fillColor').value = originalFillColorStart;
+
+    localStorage.setItem('lineColor', originalLineColor);
+    localStorage.setItem('fillColor', originalFillColorStart);
+}
+
+
 
     </script>
 </body>

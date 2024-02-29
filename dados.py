@@ -21,6 +21,6 @@ def importar_dados(planilha):
             )
             print(f"Medição importada com sucesso para o usuário {usuario_id}.")
         except User.DoesNotExist:
-            print(f"Usuário {usuario_id} não encontrado. Medição não importada.")
+            print(f"Usuário {usuario_id} não encontrado.")
 
 importar_dados('planilha.csv')

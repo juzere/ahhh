@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from .forms import CustomUserCreationForm, LoginForm
 from django.contrib import messages
 from .models import Produto
+from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from django.utils.dateparse import parse_date
 from rest_framework.response import Response
@@ -29,11 +30,11 @@ def meus_produtos(request):
     dispositivos = MedicaoVelocidade.objects.filter(usuario=request.user).values_list('dispositivo_id', flat=True).distinct()
     dispositivo_selecionado = request.GET.get('dispositivo_id')
 
-    # Filtra as medições com base no dispositivo selecionado, além das datas
+    
     if dispositivo_selecionado:
         medicoes = MedicaoVelocidade.objects.filter(usuario=request.user, dispositivo_id=dispositivo_selecionado)
     else:
-        medicoes = MedicaoVelocidade.objects.none()  # Ou sua lógica preferida aqui
+        medicoes = MedicaoVelocidade.objects.none()  
 
     datas_json = json.dumps([medicao.data_hora.strftime('%Y-%m-%d %H:%M') for medicao in medicoes])
     velocidades_json = json.dumps([medicao.velocidade for medicao in medicoes])
@@ -60,6 +61,10 @@ def login_view(request):
     else:
         form = LoginForm() 
     return render(request, 'login.html', {'form': form})
+
+
+
+
 
 def register(request):
     if request.method =='POST':
@@ -92,7 +97,7 @@ class CustomPasswordResetCompleteView(PasswordResetCompleteView):
 def receber_medicao(request):
     velocidade = request.data.get('velocidade')
     usuario_id = request.data.get('usuario_id')
-    dispositivo_id = request.data.get('dispositivo_id')  # Adicionado
+    dispositivo_id = request.data.get('dispositivo_id')  
 
     if velocidade is not None and usuario_id is not None and dispositivo_id is not None:
         try:
